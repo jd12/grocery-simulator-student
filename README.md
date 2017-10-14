@@ -35,7 +35,7 @@ In the test folder, you are provided with several JUnit test cases that will hel
 ### Support Code API
 The Support Code’s comments have been generated into a nicely formatted API that can be found here: 
 
-https://jd12.github.io/postfix-evaluator/
+https://jd12.github.io/grocery-simulator-student/
 
 It is not important that you understand how the support code is implemented but it is important that you understand what the support code offers. It is highly recommended that you spend a day simply reading over the comments in each of the interfaces provided:
 
