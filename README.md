@@ -1,4 +1,8 @@
-# Post Fix Evaluator
+# Grocery Store Simulator 
+
+## Still needs to be updated 
+
+Find project description [here](https://docs.google.com/document/d/1oONvtW7my1dO7zFamuBnVkNLgq5e4kuO5PdGGq6j0bI/edit?usp=sharing)
 
 
 ## Overview
