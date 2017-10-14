@@ -10,39 +10,51 @@ import simulator.shopper.Shopper;
  */
 public final class Transaction {
 
+  /**
+   * The receipt associated with this {@link Transaction}.
+   */
   private final AbstractReceipt receipt;
+  /**
+   * The shopper associated with this {@link Transaction}.
+   */
   private final Shopper shopper;
-  private final int timesteps;
+  /**
+   * The time when this {@link Transaction} was created.
+   */
   private final int startTime;
+  /**
+   * The number of time steps to complete this {@link Transaction}.
+   */
+  private final int timesteps;
 
   /**
-   * Creates a {@link Transaction} for with the specified receipt at the specified startTime, 
-   * for the specified shopper taking the specified time of transaction
-   * @param receipt the receipt associated with this {@link Transaction} 
-   * @param shopper the shopper associated with this {@link Transaction}
-   * @param startTime the time when this {@link Transaction} was created
-   * @param timesteps the number of time steps to complete this {@link Transaction}
+   * Creates a {@link Transaction} for with the specified receipt at the
+   * specified startTime for the specified shopper taking the specified time of transaction.
+   * @param r the receipt associated with this {@link Transaction}
+   * @param s the shopper associated with this {@link Transaction}
+   * @param st the time when this {@link Transaction} was created
+   * @param ts the number of time steps to complete this {@link Transaction}
    * @throws NullPointerException if {@code receipt} or {@code shopper} are {@code null}
    * @throws IllegalArgumentException if {@code time} is less than 1.
    */
-  public Transaction(AbstractReceipt receipt, Shopper shopper, int startTime, int timesteps) {
-    if (receipt == null || shopper == null) {
+  public Transaction(final AbstractReceipt r, final Shopper s, final int st, final int ts) {
+    if (r == null || s == null) {
       throw new NullPointerException("Receipt and Shopper must be non-null");
     }
-    if (timesteps < 1) {
+    if (ts < 1) {
       throw new IllegalArgumentException("Cannot perform transaction in less than 1 time step.");
     }
-    this.receipt = receipt;
-    this.shopper = shopper;
-    this.startTime = startTime;
-    this.timesteps = timesteps;
+    this.receipt = r;
+    this.shopper = s;
+    this.startTime = st;
+    this.timesteps = ts;
   }
 
   /**
    * Returns the {@link AbstractReceipt} for this {@link Transaction}.
    * @return the {@link AbstractReceipt} for this {@link Transaction}
    */
-  public final AbstractReceipt getReceipt() {
+  public AbstractReceipt getReceipt() {
     return receipt;
   }
 
@@ -50,7 +62,7 @@ public final class Transaction {
    * Returns the {@link Shopper} associated with this {@link Transaction}.
    * @return the {@link Shopper} associated with this {@link Transaction}
    */
-  public final Shopper getShopper() {
+  public Shopper getShopper() {
     return shopper;
   }
 
@@ -59,7 +71,7 @@ public final class Transaction {
    * be greater than or equal to 1.
    * @return the number of time steps required to complete this transaction.
    */
-  public final int getTimeSteps() {
+  public int getTimeSteps() {
     return timesteps;
   }
 
@@ -67,7 +79,7 @@ public final class Transaction {
    * Returns the time when this {@link Transaction} was created.
    * @return the time when this {@link Transaction} was created.
    */
-  public final int getStartTime() {
+  public int getStartTime() {
     return startTime;
   }
 

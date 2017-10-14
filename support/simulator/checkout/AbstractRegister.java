@@ -21,14 +21,21 @@ import simulator.shopper.Shopper;
  * To implement a {@link AbstractRegister} one must implement the
  * {@link AbstractRegister#createTransaction(Shopper)} method.
  * </p>
- * 
  * @author jcollard, jddevaug
- * 
  */
 public abstract class AbstractRegister {
 
+  /**
+   * The cost of running the register.
+   */
   private double runningCost = 0;
+  /**
+   * How long the register has been on in seconds.
+   */
   private int runningTime = 0;
+  /**
+   * The {@link List} of {@link Transaction}s that this register has processed.
+   */
   private final List<Transaction> transactions = new LinkedList<Transaction>();
 
   /**
@@ -36,12 +43,11 @@ public abstract class AbstractRegister {
    * to processing the {@link Shopper} the running cost is increased relative
    * to the speed and difficulty of the groceries purchased by the
    * {@link Shopper}
-   * 
    * @param s
    *            the shopper to process
    * @return a {@link Transaction} for this customer
    */
-  public final Transaction processShopper(Shopper s) {
+  public final Transaction processShopper(final Shopper s) {
     if (s == null) {
       throw new NullPointerException();
     }
@@ -78,19 +84,18 @@ public abstract class AbstractRegister {
    * the specified shopper arrived. If it is, it advances to that time step.
    * @param s the shopper the register checks against
    */
-  private final void checkRunningTime(Shopper s) {
+  private void checkRunningTime(final Shopper s) {
     assert s != null;
     int difference = s.getTime() - runningTime;
     if (difference > 0) {
       runningTime += difference;
-      // The base running cost for a register is 1 per timestep 
+      // The base running cost for a register is 1 per timestep
       runningCost += difference;
     }
   }
 
   /**
    * Returns the total running cost of this {@link AbstractRegister}.
-   * 
    * @return the total running cost of this {@link AbstractRegister}
    */
   public final double getRunningCost() {
@@ -99,7 +104,6 @@ public abstract class AbstractRegister {
 
   /**
    * Returns the running time of this {@link AbstractRegister}.
-   * 
    * @return the running time of this {@link AbstractRegister}.
    */
   public final int getRunningTime() {
@@ -109,7 +113,6 @@ public abstract class AbstractRegister {
   /**
    * Returns a {@link List} containing all transactions processed by this
    * {@link AbstractRegister}. The returned list is an immutable view.
-   * 
    * @return a {@link List} containing all transactions processed by this
    *         {@link AbstractRegister}.
    */
@@ -120,7 +123,6 @@ public abstract class AbstractRegister {
   /**
    * This method determines how a {@link Transaction} is created when a
    * {@link Shopper} is processed.
-   * 
    * @param s
    *            the shopper being processed
    * @return a {@link Transaction} for the shopper

@@ -5,9 +5,7 @@ import simulator.grocery.GroceryInterface;
 /**
  * This file contains your implementation of some {@link GroceryInterface} items that
  * must be available in your {@link GroceryStore}.
- * 
  * @author jcollard, jddevaug
- * 
  */
 public class Groceries {
 
