@@ -24,7 +24,8 @@ import simulator.shopper.Shopper;
  * @author jcollard, jddevaug
  */
 public abstract class AbstractRegister {
-
+  
+  private static final int DIFFICULTY_MULTIPLIER = 100;
   /**
    * The cost of running the register.
    */
@@ -60,6 +61,7 @@ public abstract class AbstractRegister {
     }
 
     double difficulty = 0.0;
+    
 
     for (GroceryInterface g : t.getReceipt().getGroceries()) {
       difficulty += g.getHandlingRating();
@@ -67,7 +69,7 @@ public abstract class AbstractRegister {
 
     // The faster the processing is completed, the more expensive
     // it is to run the register
-    runningCost += (difficulty * 100)
+    runningCost += (difficulty * DIFFICULTY_MULTIPLIER)
         / (t.getTimeSteps() * t.getTimeSteps());
 
     // The base cost for running a register is 1 per timestep

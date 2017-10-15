@@ -16,9 +16,9 @@ import simulator.grocery.GroceryInterface;
  */
 public class Shopper {
 
-  private static int nextID;
+  private static int nextId;
   private final int time;
-  private final int uniqueID;
+  private final int uniqueId;
   private final List<GroceryInterface> groceries;
 
   /**
@@ -33,11 +33,11 @@ public class Shopper {
    * @throws NullPointerException
    *             if {@code groceries} is {@code null}
    */
-  public Shopper(List<GroceryInterface> groceries, int time) {
+  public Shopper(final List<GroceryInterface> groceries, int time) {
     if (groceries == null) {
       throw new NullPointerException();
     }
-    this.uniqueID = nextID++;
+    this.uniqueId = nextId++;
     this.time = time;
     this.groceries = Collections
         .unmodifiableList(new LinkedList<GroceryInterface>(groceries));
@@ -48,8 +48,8 @@ public class Shopper {
    * 
    * @return a uniquely identifying integer for this {@link Shopper}
    */
-  public final int getUniqueID() {
-    return uniqueID;
+  public final int getUniqueId() {
+    return uniqueId;
   }
 
   /**
@@ -80,7 +80,7 @@ public class Shopper {
    * @param lines the {@link List} of {@link CheckoutLineInterface} for the store
    * @return whether or not the shopper entered a line
    */
-  public boolean selectLine(List<CheckoutLineInterface> lines) {
+  public boolean selectLine(final List<CheckoutLineInterface> lines) {
     for (CheckoutLineInterface line : lines) {
       if (line.canEnterLine(this)) {
         line.enqueue(this);

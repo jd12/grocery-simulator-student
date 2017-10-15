@@ -25,29 +25,30 @@ public final class Transaction {
   /**
    * The number of time steps to complete this {@link Transaction}.
    */
-  private final int timesteps;
+  private final int timeSteps;
 
   /**
    * Creates a {@link Transaction} for with the specified receipt at the
    * specified startTime for the specified shopper taking the specified time of transaction.
-   * @param r the receipt associated with this {@link Transaction}
-   * @param s the shopper associated with this {@link Transaction}
-   * @param st the time when this {@link Transaction} was created
-   * @param ts the number of time steps to complete this {@link Transaction}
+   * @param receipt the receipt associated with this {@link Transaction}
+   * @param shopper the shopper associated with this {@link Transaction}
+   * @param startTime the time when this {@link Transaction} was created
+   * @param timeSteps the number of time steps to complete this {@link Transaction}
    * @throws NullPointerException if {@code receipt} or {@code shopper} are {@code null}
    * @throws IllegalArgumentException if {@code time} is less than 1.
    */
-  public Transaction(final AbstractReceipt r, final Shopper s, final int st, final int ts) {
-    if (r == null || s == null) {
+  public Transaction(final AbstractReceipt receipt, final Shopper shopper, 
+      int startTime, int timeSteps) {
+    if (receipt == null || shopper == null) {
       throw new NullPointerException("Receipt and Shopper must be non-null");
     }
-    if (ts < 1) {
+    if (timeSteps < 1) {
       throw new IllegalArgumentException("Cannot perform transaction in less than 1 time step.");
     }
-    this.receipt = r;
-    this.shopper = s;
-    this.startTime = st;
-    this.timesteps = ts;
+    this.receipt = receipt;
+    this.shopper = shopper;
+    this.startTime = startTime;
+    this.timeSteps = timeSteps;
   }
 
   /**
@@ -72,7 +73,7 @@ public final class Transaction {
    * @return the number of time steps required to complete this transaction.
    */
   public int getTimeSteps() {
-    return timesteps;
+    return timeSteps;
   }
 
   /**
