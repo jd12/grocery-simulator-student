@@ -10,9 +10,7 @@ import simulator.grocery.GroceryInterface;
 /**
  * A {@link Shopper} contains a list of {@link GroceryInterface} items that they
  * wish to purchase from a store.
- * 
  * @author jcollard, jddevaug
- * 
  */
 public class Shopper {
 
@@ -25,7 +23,6 @@ public class Shopper {
    * Creates a new {@link Shopper} that has a unique ID that no previously
    * created {@link Shopper} has. The created {@link Shopper}'s shopping list
    * will be a copy of the list specified.
-   * 
    * @param groceries
    *            the shoppers grocery list
    * @param time
@@ -45,7 +42,6 @@ public class Shopper {
 
   /**
    * Returns a uniquely identifying integer for this {@link Shopper}.
-   * 
    * @return a uniquely identifying integer for this {@link Shopper}
    */
   public final int getUniqueId() {
@@ -55,7 +51,6 @@ public class Shopper {
   /**
    * Returns an immutable {@link List} containing this {@link Shopper}'s
    * grocery items.
-   * 
    * @return an immutable {@link List} containing this {@link Shopper}'s
    *         grocery items
    */
@@ -76,7 +71,6 @@ public class Shopper {
    * {@link Shopper} may choose to add itself to the line. This method returns
    * {@code true} if the {@link Shopper} entered a line and {@code false} if
    * the shopper did not select a line.
-   * 
    * @param lines the {@link List} of {@link CheckoutLineInterface} for the store
    * @return whether or not the shopper entered a line
    */

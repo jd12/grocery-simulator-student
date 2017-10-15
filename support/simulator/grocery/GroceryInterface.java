@@ -1,7 +1,5 @@
 package simulator.grocery;
 
-import simulator.shopper.Shopper;
-
 /**
  * A {@link GroceryInterface} describes an item that is available.
  * for sale in a {@link GroceryStore}
@@ -14,7 +12,7 @@ public interface GroceryInterface {
    * Returns the name of this {@link GroceryInterface}.
    * @return the name of this {@link GroceryInterface}
    */
-  public String getName();
+  String getName();
 
   /**
    * Returns the price of this {@link GroceryInterface}. This is
@@ -22,7 +20,7 @@ public interface GroceryInterface {
    * the item. This must be a value greater than or equal to 0.
    * @return the price of this {@link GroceryInterface}
    */
-  public double getPrice();
+  double getPrice();
 
   /**
    * Returns the cost of this {@link GroceryInterface}. This is the
@@ -30,7 +28,7 @@ public interface GroceryInterface {
    * This must be a value greater than 0.
    * @return the cost of this {@link GroceryInterface}
    */
-  public double getCost();
+  double getCost();
 
   /**
    * Returns a number between [0, 1] that describes the difficulty
@@ -38,6 +36,6 @@ public interface GroceryInterface {
    * and 1 is extremely difficult.
    * @return the handling rating associated with this {@link GroceryInterface}
    */
-  public double getHandlingRating();
+  double getHandlingRating();
 
 }

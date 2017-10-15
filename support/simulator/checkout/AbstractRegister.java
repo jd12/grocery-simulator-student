@@ -24,7 +24,6 @@ import simulator.shopper.Shopper;
  * @author jcollard, jddevaug
  */
 public abstract class AbstractRegister {
-  
   private static final int DIFFICULTY_MULTIPLIER = 100;
   /**
    * The cost of running the register.
@@ -61,7 +60,6 @@ public abstract class AbstractRegister {
     }
 
     double difficulty = 0.0;
-    
 
     for (GroceryInterface g : t.getReceipt().getGroceries()) {
       difficulty += g.getHandlingRating();

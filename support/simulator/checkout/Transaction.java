@@ -37,7 +37,7 @@ public final class Transaction {
    * @throws NullPointerException if {@code receipt} or {@code shopper} are {@code null}
    * @throws IllegalArgumentException if {@code time} is less than 1.
    */
-  public Transaction(final AbstractReceipt receipt, final Shopper shopper, 
+  public Transaction(final AbstractReceipt receipt, final Shopper shopper,
       int startTime, int timeSteps) {
     if (receipt == null || shopper == null) {
       throw new NullPointerException("Receipt and Shopper must be non-null");
