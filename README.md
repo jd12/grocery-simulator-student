@@ -11,7 +11,7 @@ For this assignment, you will be implementing a Post Fix Evaluator to perform ba
 **[Part Three: Implement NormalLine and ExpressLine](#part-three-implement-normalline-and-expressline)**<br>
 **[Part Four: Create Groceries](#part-four-create-groceries)**<br>
 **[Part Five: Implement Receipt](#part-five-implement-receipt)**<br>
-**[Part Six: Commit Project and Merge Master ](#part-five-commit-project-and-merge-master)**<br>
+**[Part Six: Commit Project and Merge Master ](#part-six-commit-project-and-merge-master)**<br>
 
 ## Book
 This assignment is based off Chapter 5 in the Java Software Structures book
@@ -64,7 +64,7 @@ Once you feel like the tests accurately represent what you would like to test, c
 
 **Note**: For this portion of the assignment, you may not use any of the provided Collection classes provided by the java standard API. A list of them can be seen in the “All Known Subinterfaces” and “All Known Implementing Classes” of the following URL: http://docs.oracle.com/javase/7/docs/api/java/util/Collection.html
 
-## Part Three: Implement a NormalLine and an ExpressLine
+## Part Three: Implement NormalLine and ExpressLine
 The `simulator.checkout.CheckoutLineInterface` extends `QueueInterface<Shopper>`. That is, it is just a queue for shoppers to stand in while they wait to be processed. However, there are a few additional requirements for this interface.
 
 First, it defines a `canEnterLine`. This method determines if a shopper is allowed to enter a particular line. This can be used to represent special lines such as “15 items or less”.
