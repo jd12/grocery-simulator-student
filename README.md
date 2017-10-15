@@ -7,12 +7,11 @@ For this assignment, you will be implementing a Post Fix Evaluator to perform ba
 **[Files to complete](#files-to-complete)**<br>
 **[Support Code API](#support-code-api)**<br>
 **[Part One: Clone, Branch, and Import Project](#part-one-clone-branch-and-import-project)**<br>
-**[Part Two: Implementing LinkedStack](#part-two-implementing-linkedstack)**<br>
-**[Part Three: Implement Arithmetic Operators](#part-three-implement-arithmetic-operators)**<br>
-**[Part Four: Implement a Postfix Arithmetic Evaluator](#part-four-implement-a-postfix-arithmetic-evaluator)**<br>
-**[Part Five: Commit Project and Submit Pull Request](#part-five-commit-project-and-submit-pull-request)**<br>
-**[Bonus: Infix Expression Evaluator](#bonus-infix-expression-evaluator)**<br>
-**[Additional Notes: Help for the project](#additional-notes)**<br>
+**[Part Two: Implementing QueueInterface](#part-two-implementing-queueinterface)**<br>
+**[Part Three: Implement NormalLine and ExpressLine](#part-three-implement-normalline-and-expressline)**<br>
+**[Part Four: Create Groceries](#part-four-create-groceries)**<br>
+**[Part Five: Implement Receipt](#part-five-implement-receipt)**<br>
+**[Part Six: Commit Project and Merge Master ](#part-five-commit-project-and-merge-master)**<br>
 
 ## Book
 This assignment is based off Chapter 5 in the Java Software Structures book
@@ -84,7 +83,7 @@ In the `config.Groceries` class, return valid implementations for each of the st
 
 **Tip:** You should be able to accomplish this by implementing a single class called `Grocery`.
 
-## Part Five: Commit Project and Submit Pull Request 
+## Part Five: Implement Receipt  
 
 For this part of the assignment, you will be extending the abstract class `simulator.AbstractReceipt`. If you look at the definition, you will see there are two abstract methods left for you to implement: `getSubTotal()` and `getSaleValue()`. 
 
@@ -95,7 +94,7 @@ For this part of the assignment, you will be extending the abstract class `simul
 **List API:** http://docs.oracle.com/javase/7/docs/api/java/util/List.html<br>
 **Iterable API:** http://docs.oracle.com/javase/7/docs/api/java/lang/Iterable.html<br>
 
-### Using Enhanced For Loop w/ List:
+**Using Enhanced For Loop w/ List:**
 Assume there is some `List<String>` called strings. Then we can write:
 
 ```java
@@ -106,7 +105,7 @@ for(String s : strings){
 
 This will print out all of the elements in strings.
 
-### Another Example:
+**Another Example:**
 Assume there is some `List<GroceryInterface>` called groceries. Then we can write:
 
 ```java
@@ -119,7 +118,4 @@ This will print out the cost of all `GroceryInterface` items in groceries.
 
 ## Part Six: Commit Project and Merge Master 
 When you have finished your solution and are ready to submit, make your final commit, merge your master branch with your dev branch, and push eveything up to Github. 
-
-
-
 
