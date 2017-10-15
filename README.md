@@ -1,7 +1,8 @@
 # Grocery Store Simulator 
 
-## Overview
-For this assignment, you will be implementing a Post Fix Evaluator to perform basic arithmetic.
+## Backstory
+
+After success with their latest simulation game “The Jims 3”, BA Games is at it again. You’ve been hired to develop a prototype simulator for this year's most anticipated Grocery Store Simulation game creatively named “Grocery Store Simulator 2017”. Will you rise to the challenge?
 
 ### Table of Contents
 **[Files to complete](#files-to-complete)**<br>
