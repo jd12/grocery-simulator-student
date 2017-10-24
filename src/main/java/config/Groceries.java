@@ -7,7 +7,14 @@ import simulator.grocery.GroceryInterface;
  * must be available in your {@link GroceryStore}.
  * @author jcollard, jddevaug
  */
-public class Groceries {
+public final class Groceries {
+
+    /**
+     * Private constructor to prevent class instantiation.
+     */
+    private Groceries() {
+
+    }
 
     /**
      * Returns your implementation of Milk.
