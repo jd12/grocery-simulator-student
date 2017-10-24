@@ -14,7 +14,7 @@ import simulator.grocery.GroceryInterface;
  */
 public class Shopper {
 
-  private static int nextId;
+  // private static int nextId;
   private final int time;
   private final int uniqueId;
   private final List<GroceryInterface> groceries;
@@ -34,7 +34,7 @@ public class Shopper {
     if (groceries == null) {
       throw new NullPointerException();
     }
-    this.uniqueId = nextId++;
+    this.uniqueId = 0;
     this.time = time;
     this.groceries = Collections
         .unmodifiableList(new LinkedList<GroceryInterface>(groceries));
