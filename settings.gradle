@@ -16,4 +16,4 @@ include 'api'
 include 'services:webservice'
 */
 
-rootProject.name = 'grocery-simulator-gradle'
+rootProject.name = 'grocery-simulator-student'
