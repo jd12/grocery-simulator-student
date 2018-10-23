@@ -2,7 +2,7 @@
 
 ## Backstory
 
-After success with their latest simulation game “The Jims 3”, BA Games is at it again. You’ve been hired to develop a prototype simulator for this year's most anticipated Grocery Store Simulation game creatively named “Grocery Store Simulator 2017”. Will you rise to the challenge?
+After success with their latest simulation game “The Jims 3”, BA Games is at it again. You’ve been hired to develop a prototype simulator for this year's most anticipated Grocery Store Simulation game creatively named “Grocery Store Simulator 2018”. Will you rise to the challenge?
 
 ### Table of Contents
 **[Files to complete](#files-to-complete)**<br>
@@ -12,7 +12,9 @@ After success with their latest simulation game “The Jims 3”, BA Games is at
 **[Part Three: Implement NormalLine and ExpressLine](#part-three-implement-normalline-and-expressline)**<br>
 **[Part Four: Create Groceries](#part-four-create-groceries)**<br>
 **[Part Five: Implement Receipt](#part-five-implement-receipt)**<br>
-**[Part Six: Commit Project and Merge Master ](#part-six-commit-project-and-merge-master)**<br>
+**[Part Six: Submit Pull Request ](#part-six-submit-pull-request)**<br>
+**[Part Seven: Implement a SimpleRegister Class ](#part-seven-implement-a-simpleregister-class)**<br>
+**[Part Eight: Implement a SimpleStore Class ](#part-eight-implement-a-simplestore-class)**<br>
 
 ## Book
 This assignment is based off Chapter 5 in the Java Software Structures book
@@ -40,8 +42,20 @@ Begin by cloning the provided project, creating your dev branch, and importing i
 
 ```
 git clone <url for github repository>
-git branch dev
-git checkout dev
+```
+
+After cloning this repository you want to run these commands
+
+```
+cp pre-commit .git/hooks
+chmod -x .git/hooks/pre-commit
+```
+
+Then you want to create a development branch
+
+```
+git branch development
+git checkout development
 ```
 
 You should then import it to your IDE of choice. 
@@ -50,7 +64,7 @@ By default, your project should have no errors and contain the following root it
 
 **src** - The source folder where all code you are submitting must go. You can change anything you want in this folder, you can add new files, etc...<br>
 **test** - The test folder where all of the public unit tests are available<br>
-**support** - This folder contains support code that I encourage you to use (and must be used to pass certain tests). You are not allowed to change anything in this folder.<br>
+**support** - This folder contains support code that I encourage you to use (and must be used to pass certain tests). I would be very careful changing files in this folder.<br>
 **JUnit 4** - A library that is used to run the test programs<br>
 **JRE System Library** - This is what allows java to run<br>
 
@@ -99,7 +113,7 @@ For this part of the assignment, you will be extending the abstract class `simul
 Assume there is some `List<String>` called strings. Then we can write:
 
 ```java
-for(String s : strings){
+for (String s : strings){
   System.out.println(s);
 }
 ```
@@ -110,13 +124,91 @@ This will print out all of the elements in strings.
 Assume there is some `List<GroceryInterface>` called groceries. Then we can write:
 
 ```java
-for(GroceryInterface g : groceries){
+for (GroceryInterface g : groceries){
   System.out.println(g.getCost());
 }
 ```
 
 This will print out the cost of all `GroceryInterface` items in groceries.
 
-## Part Six: Commit Project and Merge Master 
-When you have finished your solution and are ready to submit, make your final commit, merge your master branch with your dev branch, and push eveything up to Github. 
+## Part Six: Submit Pull Request
+When you have finished and are ready to submit, submit a pull request on Github to merge your development branch with your master branch. Mark me as a reviewer and I’ll get notified.
+
+# Part Seven: Implement a SimpleRegister Class
+
+For this part of the assignment, you will familiarize yourself with the `simulator.checkout.AbstractRegister` class. 
+
+This class facilitates creating Transactions for Shoppers who visit a Grocery Store. To implement this class, you can simply extend it and implement the abstract method `createTransaction(Shopper s)`. Later in the assignment, you will need to create a more sophisticated algorithm for checking out a customer. However, for this portion you should simply generate a Transaction with the following properties:
+
+A Receipt with all of the shoppers groceries and no discount.
+The Shopper passed to the `createTransaction` method.
+If the number of grocery items being sold is 0, the checkout time should be 1. Otherwise, the amount of time to process a shopper should be 4 multiplied by the number of grocery items being sold.
+
+# Part Eight: Implement a SimpleStore class
+
+For this part of the assignment, you will familiarize yourself with the `simulator.store.AbstractGroceryStore` class. Your `SimpleStore` implementation must meet the following requirements:
+
+Utilizes 2 SimpleRegisters that are always turned on.
+Uses 1 Normal Line
+Uses 1 Express Line
+
+The implementation details for this class might seem daunting at first. Below is a suggested order for implementing them and hints on how you might do it.
+SimpleStore Constructor
+In the constructor for your SimpleStore, you should create 2 SimpleRegisters and call the `turnOn()` method for both of them. The `turnOn()` method ensures that the registers can process shoppers.
+
+In your constructor, you should create a `List<CheckoutLineInterface>` and add a `NormalLine` and `ExpressLine` to it.
+
+### getLines()
+This method should return the List you created in your constructor. This line is handed off to the BigBrother object. BigBrother will use this to direct customers to your store.
+
+### tick()
+This method is called by BigBrother during the simulation to advance the simulation one time step. When this method is called, you will want to check to see if each of your registers `isBusy()`. If they are not, you will want to try and process a shopper. You can do this by checking if your lines are `isEmpty()` and then `dequeue()` the next Shopper to a register to be processed.
+
+**Hint**: Use two ArrayLists whose indices associate each register to a single line.
+
+### getTransactions()
+The AbstractRegister tracks all of the Transactions it creates. You should utilize this to make your life easier. List has an `addAll()` method that might be useful!
+
+### getAverageWaitingTime()
+This should return the average waiting time per shopper. This is the sum of `getWaitingTime()` for each Shopper divided by the total number of Shoppers.
+
+**Hint**: Use the Transactions created by your registers to get to the Shopper data.
+`getTotalSales()`
+This should return the total amount of money your store receives from all Shoppers.
+
+**Hint**: This can be calculated by using the Transactions created by your registers to get to the Receipt data.
+
+### getTotalCost()
+This should return the total amount of money your store spent to run. This is the sum of the cost of all groceries sold AND the `getRunningCost()` of each of your registers.
+
+### getTotalProfit()
+Returns the total profit generated by your store.
+
+### getNumberOfShoppers()
+This is the total number of Shoppers that visited your store. This should be equal to the number of transactions your store generates.
+
+### getNumberOfIrateShoppers()
+This is the total number of Shoppers that visited your store that `isIrate()`.
+
+## Part Nine: Implement a ProfitableStore class
+
+Now that you’ve familiarized yourself with the `AbstractGroceryStore` class, you must implement a store that can turn a profit using the SimpleWorld. To do this, you will need to implement a more competitive Register class. In addition to this, you will almost certainly need a better strategy than the SimpleStore.
+
+For this portion, it is recommended that you subclass your SimpleStore class and @Override the `tick()`, `getLines()`, and `getTransactions()` methods. If you have implemented the other methods in a way that utilizes `getTransactions()`, they should work for this subclass. Depending on your implementation, you may also want to @Override `getTotalCost()`.
+
+It is also recommended that you write your own tests to double check that your get methods are returning the way you believe they should. The BigBrother object collects information that will be used by the autograder to ensure that your methods are not simply fooling the test simulations.
+
+### Graded Simulations
+There are two graded simulations in the test/ directory provided. These are in the simulator.simulations package. You will notice that these are not unit tests. Instead, these are runnable classes containing main methods. Each of these creates a SimpleWorld specifying the rate at which customers will enter your store. After this, your ProfitableStore (as specified in the Configuration class) is selected. BigBrother ticks 43200 times running the simulation. Finally, the `getTotalProfit()` method of your store will be called to check if your store turned a profit. You should NOT make your store simply return a value greater than 0, the BigBrother object collects information throughout the simulation that will be able to verify the results.
+Two tips for increasing profit
+
+**How many irate shoppers did you have?** Irate shoppers empty their shopping cart before they are dequeued. Although it is possible to make a profit by only serving some shoppers, it is highly discouraged.
+**How much are your registers pushing up your running cost?**
+If you process shoppers too fast, you will not be able to make a profit. The formula for calculating the cost to check out a shopper is in the AbstractRegister class.
+In the SimulationRate1000.java test, your registers may be idle. Perhaps you can save money by turning them off when they are not being used.
+
+## Part Ten: Submit Pull Request
+When you have finished and are ready to submit, submit a pull request on Github to merge your development branch with your master branch. Mark me as a reviewer and I’ll get notified.
+
+
 

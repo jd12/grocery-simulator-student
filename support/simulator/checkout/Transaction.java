@@ -1,58 +1,51 @@
 package simulator.checkout;
 
+import simulator.bigbrother.BigBrother;
 import simulator.shopper.Shopper;
 
 /**
- * A {@link Transaction} contains a receipt for a shopper and the amount.
- * of time it took to complete a transaction
+ * A {@link Transaction} contains a receipt for a shopper and the amount of time
+ * it took to complete a transaction.
+ *
  * @author jcollard, jddevaug
  *
  */
 public final class Transaction {
 
-  /**
-   * The receipt associated with this {@link Transaction}.
-   */
   private final AbstractReceipt receipt;
-  /**
-   * The shopper associated with this {@link Transaction}.
-   */
   private final Shopper shopper;
-  /**
-   * The time when this {@link Transaction} was created.
-   */
+  private final int timesteps;
   private final int startTime;
-  /**
-   * The number of time steps to complete this {@link Transaction}.
-   */
-  private final int timeSteps;
 
   /**
-   * Creates a {@link Transaction} for with the specified receipt at the
-   * specified startTime for the specified shopper taking the specified time of transaction.
+   * Creates a {@link Transaction} with the specified {@link AbstractReceipt}, {@link Shopper},
+   * that takes the specified number of time steps.
+   * The number of time steps to complete a transaction
+   * must be at least 1.
    * @param receipt the receipt associated with this {@link Transaction}
    * @param shopper the shopper associated with this {@link Transaction}
-   * @param startTime the time when this {@link Transaction} was created
-   * @param timeSteps the number of time steps to complete this {@link Transaction}
-   * @throws NullPointerException if {@code receipt} or {@code shopper} are {@code null}
-   * @throws IllegalArgumentException if {@code time} is less than 1.
+   * @param timesteps the number of time steps to complete this transaction.
+   * @throws NullPointerException if {@code receipt} of {@code shopper} are {@code null}
+   * @throws IllegalArgumentException if {@code timesteps} is less than 1
    */
-  public Transaction(final AbstractReceipt receipt, final Shopper shopper,
-      int startTime, int timeSteps) {
+  public Transaction(final AbstractReceipt receipt, final Shopper shopper, int timesteps) {
     if (receipt == null || shopper == null) {
-      throw new NullPointerException("Receipt and Shopper must be non-null");
+      throw new NullPointerException(
+          "Receipt and Shopper must be non-null");
     }
-    if (timeSteps < 1) {
-      throw new IllegalArgumentException("Cannot perform transaction in less than 1 time step.");
+    if (timesteps < 1) {
+      throw new IllegalArgumentException(
+          "Cannot perform transaction in less than 1 time step.");
     }
     this.receipt = receipt;
     this.shopper = shopper;
-    this.startTime = startTime;
-    this.timeSteps = timeSteps;
+    this.startTime = BigBrother.getBigBrother().getTime();
+    this.timesteps = timesteps;
   }
 
   /**
    * Returns the {@link AbstractReceipt} for this {@link Transaction}.
+   *
    * @return the {@link AbstractReceipt} for this {@link Transaction}
    */
   public AbstractReceipt getReceipt() {
@@ -61,6 +54,7 @@ public final class Transaction {
 
   /**
    * Returns the {@link Shopper} associated with this {@link Transaction}.
+   *
    * @return the {@link Shopper} associated with this {@link Transaction}
    */
   public Shopper getShopper() {
@@ -68,16 +62,18 @@ public final class Transaction {
   }
 
   /**
-   * Returns the number of time steps required to complete this transaction. This number will
-   * be greater than or equal to 1.
+   * Returns the number of time steps required to complete this transaction.
+   * This number will be greater than or equal to 1.
+   *
    * @return the number of time steps required to complete this transaction.
    */
   public int getTimeSteps() {
-    return timeSteps;
+    return timesteps;
   }
 
   /**
    * Returns the time when this {@link Transaction} was created.
+   *
    * @return the time when this {@link Transaction} was created.
    */
   public int getStartTime() {

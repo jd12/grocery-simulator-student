@@ -69,5 +69,38 @@ public final class Configuration {
             final double discount) {
         return null;
     }
+    
+    /**
+   * Returns the {@link AbstractRegister} implementation you would like to be
+   * graded.
+   *
+   * @return the {@link AbstractRegister} implementation you would like to be
+   *         graded.
+   */
+  public static AbstractRegister getSimpleRegister() {
+    return null;
+  }
+
+  /**
+   * Returns the {@link AbstractGroceryStore} implementation you would like to
+   * be graded for this Simple Store part of the project.
+   *
+   * @return the {@link AbstractGroceryStore} implementation you would like to
+   *         be graded for this Simple Store part of the project.
+   */
+  public static AbstractGroceryStore getSimpleStore() {
+    return null;
+  }
+
+  /**
+   * Returns the {@link AbstractGroceryStore} implementation you would like to
+   * be graded for the Profitable Store part of the project.
+   *
+   * @return the {@link AbstractGroceryStore} implementation you would like to
+   *         be graded for the Profitable Store part of the project.
+   */
+  public static AbstractGroceryStore getProfitableStore() {
+    return null;
+  }
 
 }

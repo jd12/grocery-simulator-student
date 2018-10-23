@@ -4,6 +4,8 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import simulator.bigbrother.BigBrother;
+import simulator.bigbrother.BigBrotherIsWatchingYouException;
 import simulator.grocery.GroceryInterface;
 import simulator.shopper.Shopper;
 
@@ -21,44 +23,51 @@ import simulator.shopper.Shopper;
  * To implement a {@link AbstractRegister} one must implement the
  * {@link AbstractRegister#createTransaction(Shopper)} method.
  * </p>
+ *
  * @author jcollard, jddevaug
+ *
  */
 public abstract class AbstractRegister {
-  private static final int DIFFICULTY_MULTIPLIER = 100;
-  /**
-   * The cost of running the register.
-   */
-  private double runningCost = 0;
-  /**
-   * How long the register has been on in seconds.
-   */
-  private int runningTime = 0;
-  /**
-   * The {@link List} of {@link Transaction}s that this register has processed.
-   */
+
   private final List<Transaction> transactions = new LinkedList<Transaction>();
+  private int transactionEndTime;
+  private double runningCost = 0;
+  private boolean running;
+  /**
+   * Constructs an {@link Abstract} and
+   * connects it to {@link BigBrother}.
+   */
+  protected AbstractRegister() {
+    // Big Brother knows about all Registers
+    BigBrother.getBigBrother().registerRegister(this);
+    running = false;
+  }
 
   /**
    * Processes a {@link Shopper} producing a {@link Transaction}. In addition
    * to processing the {@link Shopper} the running cost is increased relative
    * to the speed and difficulty of the groceries purchased by the
    * {@link Shopper}
+   *
    * @param s
    *            the shopper to process
    * @return a {@link Transaction} for this customer
    */
   public final Transaction processShopper(final Shopper s) {
+    if (!running) {
+      throw new BigBrotherIsWatchingYouException(
+          "You cannot process a shopper on a register that is turned off.");
+    }
     if (s == null) {
       throw new NullPointerException();
     }
 
-    checkRunningTime(s);
-    Transaction t = createTransaction(s);
-
-    if (t.getStartTime() != runningTime) {
-      throw new IllegalStateException("The start time of the transaction does not match.");
+    if (isBusy()) {
+      throw new BigBrotherIsWatchingYouException(
+          "This register is already being used.");
     }
 
+    Transaction t = createTransaction(s);
     double difficulty = 0.0;
 
     for (GroceryInterface g : t.getReceipt().getGroceries()) {
@@ -67,35 +76,18 @@ public abstract class AbstractRegister {
 
     // The faster the processing is completed, the more expensive
     // it is to run the register
-    runningCost += (difficulty * DIFFICULTY_MULTIPLIER)
+    runningCost += (difficulty * 5000)
         / (t.getTimeSteps() * t.getTimeSteps());
-
-    // The base cost for running a register is 1 per timestep
-    runningCost += t.getTimeSteps();
-
-    runningTime += t.getTimeSteps();
-
+    transactionEndTime = BigBrother.getBigBrother().getTime()
+        + t.getTimeSteps();
     transactions.add(t);
+    s.completeTransaction(t);
     return t;
   }
 
   /**
-   * Checks to see if this registers runningTime is less than the time
-   * the specified shopper arrived. If it is, it advances to that time step.
-   * @param s the shopper the register checks against
-   */
-  private void checkRunningTime(final Shopper s) {
-    assert s != null;
-    int difference = s.getTime() - runningTime;
-    if (difference > 0) {
-      runningTime += difference;
-      // The base running cost for a register is 1 per timestep
-      runningCost += difference;
-    }
-  }
-
-  /**
    * Returns the total running cost of this {@link AbstractRegister}.
+   *
    * @return the total running cost of this {@link AbstractRegister}
    */
   public final double getRunningCost() {
@@ -103,16 +95,19 @@ public abstract class AbstractRegister {
   }
 
   /**
-   * Returns the running time of this {@link AbstractRegister}.
-   * @return the running time of this {@link AbstractRegister}.
+   * Every tick increases the cost of running this {@link AbstractRegister}.
+   * This is called by {@link BigBrother} every time step.
    */
-  public final int getRunningTime() {
-    return runningTime;
+  public final void tick() {
+    if (running) {
+      runningCost += 0.15;
+    }
   }
 
   /**
    * Returns a {@link List} containing all transactions processed by this
    * {@link AbstractRegister}. The returned list is an immutable view.
+   *
    * @return a {@link List} containing all transactions processed by this
    *         {@link AbstractRegister}.
    */
@@ -121,11 +116,47 @@ public abstract class AbstractRegister {
   }
 
   /**
-   * This method determines how a {@link Transaction} is created when a
-   * {@link Shopper} is processed.
+   * Returns {@code true} if this {@link AbstractRegister} is busy and
+   * {@code false} otherwise.
+   *
+   * @return {@code true} if this {@link AbstractRegister} is busy and
+   *         {@code false} otherwise.
+   */
+  public final boolean isBusy() {
+    int time = BigBrother.getBigBrother().getTime();
+    return time < transactionEndTime;
+  }
+
+  /**
+   * Turns this {@link AbstractRegister} on. There is a starting cost of 10.
+   */
+  public final void turnOn() {
+    if (running) {
+      return;
+    }
+    runningCost += 10;
+    running = true;
+  }
+
+  /**
+   * Turns this {@link AbstractRegister} off. {@link BigBrother} will not
+   * allow you to turn this {@link AbstractRegister} off if the register is
+   * busy.
+   */
+  public final void turnOff() {
+    if (isBusy()) {
+      throw new BigBrotherIsWatchingYouException(
+          "This register was busy when you attempted to turn it off.");
+    }
+    running = false;
+  }
+
+  /**
+   * This method creates a {@link Transaction} for the given {@link Shopper}.
+   *
    * @param s
    *            the shopper being processed
-   * @return a {@link Transaction} for the shopper
+   * @return the {@link Transaction} for the given {@link Shopper}
    */
   protected abstract Transaction createTransaction(Shopper s);
 
