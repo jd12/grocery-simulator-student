@@ -3,8 +3,10 @@ package config;
 import java.util.List;
 
 import simulator.checkout.AbstractReceipt;
+import simulator.checkout.AbstractRegister;
 import simulator.checkout.CheckoutLineInterface;
 import simulator.grocery.GroceryInterface;
+import simulator.store.AbstractGroceryStore;
 import structures.QueueInterface;
 
 /**
@@ -69,7 +71,7 @@ public final class Configuration {
             final double discount) {
         return null;
     }
-    
+
     /**
    * Returns the {@link AbstractRegister} implementation you would like to be
    * graded.
