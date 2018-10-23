@@ -15,6 +15,8 @@ After success with their latest simulation game “The Jims 3”, BA Games is at
 **[Part Six: Submit Pull Request ](#part-six-submit-pull-request)**<br>
 **[Part Seven: Implement a SimpleRegister Class ](#part-seven-implement-a-simpleregister-class)**<br>
 **[Part Eight: Implement a SimpleStore Class ](#part-eight-implement-a-simplestore-class)**<br>
+**[Part Nine: Implement a ProfitableStore Class ](#part-nine-implement-a-profitablestore-class)**<br>
+**[Part Ten: Submit Pull Request ](#part-ten-submit-pull-request)**<br>
 
 ## Book
 This assignment is based off Chapter 5 in the Java Software Structures book
@@ -134,7 +136,7 @@ This will print out the cost of all `GroceryInterface` items in groceries.
 ## Part Six: Submit Pull Request
 When you have finished and are ready to submit, submit a pull request on Github to merge your development branch with your master branch. Mark me as a reviewer and I’ll get notified.
 
-# Part Seven: Implement a SimpleRegister Class
+## Part Seven: Implement a SimpleRegister Class
 
 For this part of the assignment, you will familiarize yourself with the `simulator.checkout.AbstractRegister` class. 
 
@@ -144,7 +146,7 @@ A Receipt with all of the shoppers groceries and no discount.
 The Shopper passed to the `createTransaction` method.
 If the number of grocery items being sold is 0, the checkout time should be 1. Otherwise, the amount of time to process a shopper should be 4 multiplied by the number of grocery items being sold.
 
-# Part Eight: Implement a SimpleStore class
+## Part Eight: Implement a SimpleStore class
 
 For this part of the assignment, you will familiarize yourself with the `simulator.store.AbstractGroceryStore` class. Your `SimpleStore` implementation must meet the following requirements:
 
@@ -190,7 +192,7 @@ This is the total number of Shoppers that visited your store. This should be equ
 ### getNumberOfIrateShoppers()
 This is the total number of Shoppers that visited your store that `isIrate()`.
 
-## Part Nine: Implement a ProfitableStore class
+## Part Nine: Implement a ProfitableStore Class
 
 Now that you’ve familiarized yourself with the `AbstractGroceryStore` class, you must implement a store that can turn a profit using the SimpleWorld. To do this, you will need to implement a more competitive Register class. In addition to this, you will almost certainly need a better strategy than the SimpleStore.
 
@@ -199,10 +201,11 @@ For this portion, it is recommended that you subclass your SimpleStore class and
 It is also recommended that you write your own tests to double check that your get methods are returning the way you believe they should. The BigBrother object collects information that will be used by the autograder to ensure that your methods are not simply fooling the test simulations.
 
 ### Graded Simulations
-There are two graded simulations in the test/ directory provided. These are in the simulator.simulations package. You will notice that these are not unit tests. Instead, these are runnable classes containing main methods. Each of these creates a SimpleWorld specifying the rate at which customers will enter your store. After this, your ProfitableStore (as specified in the Configuration class) is selected. BigBrother ticks 43200 times running the simulation. Finally, the `getTotalProfit()` method of your store will be called to check if your store turned a profit. You should NOT make your store simply return a value greater than 0, the BigBrother object collects information throughout the simulation that will be able to verify the results.
+There are two graded simulations in the test/ directory provided. These are in the simulator.simulations package. You will notice that these are not unit tests. Instead, these are runnable classes containing main methods. Each of these creates a SimpleWorld specifying the rate at which customers will enter your store. After this, your ProfitableStore (as specified in the Configuration class) is selected. BigBrother ticks 43200 times running the simulation. Finally, the `getTotalProfit()` method of your store will be called to check if your store turned a profit. You should NOT make your store simply return a value greater than 0, the BigBrother object collects information throughout the simulation that will be able to verify the results. 
+
 Two tips for increasing profit
 
-**How many irate shoppers did you have?** Irate shoppers empty their shopping cart before they are dequeued. Although it is possible to make a profit by only serving some shoppers, it is highly discouraged.
+**How many irate shoppers did you have?** Irate shoppers empty their shopping cart before they are dequeued. Although it is possible to make a profit by only serving some shoppers, it is highly discouraged.<br>
 **How much are your registers pushing up your running cost?**
 If you process shoppers too fast, you will not be able to make a profit. The formula for calculating the cost to check out a shopper is in the AbstractRegister class.
 In the SimulationRate1000.java test, your registers may be idle. Perhaps you can save money by turning them off when they are not being used.
