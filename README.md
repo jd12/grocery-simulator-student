@@ -150,12 +150,13 @@ If the number of grocery items being sold is 0, the checkout time should be 1. O
 
 For this part of the assignment, you will familiarize yourself with the `simulator.store.AbstractGroceryStore` class. Your `SimpleStore` implementation must meet the following requirements:
 
-Utilizes 2 SimpleRegisters that are always turned on.
-Uses 1 Normal Line
-Uses 1 Express Line
+- Utilizes 2 SimpleRegisters that are always turned on.
+- Uses 1 Normal Line
+- Uses 1 Express Line
 
 The implementation details for this class might seem daunting at first. Below is a suggested order for implementing them and hints on how you might do it.
-SimpleStore Constructor
+
+### SimpleStore Constructor
 In the constructor for your SimpleStore, you should create 2 SimpleRegisters and call the `turnOn()` method for both of them. The `turnOn()` method ensures that the registers can process shoppers.
 
 In your constructor, you should create a `List<CheckoutLineInterface>` and add a `NormalLine` and `ExpressLine` to it.
@@ -175,7 +176,8 @@ The AbstractRegister tracks all of the Transactions it creates. You should utili
 This should return the average waiting time per shopper. This is the sum of `getWaitingTime()` for each Shopper divided by the total number of Shoppers.
 
 **Hint**: Use the Transactions created by your registers to get to the Shopper data.
-`getTotalSales()`
+
+### getTotalSales()
 This should return the total amount of money your store receives from all Shoppers.
 
 **Hint**: This can be calculated by using the Transactions created by your registers to get to the Receipt data.
