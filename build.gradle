@@ -48,10 +48,3 @@ checkstyle {
     configFile = file('config/checkstyle/checkstyle.xml')
     toolVersion = "8.1"   // set Checkstyle version here
 }
-
-pmd {
-  ignoreFailures = true
-  ruleSetFiles = files("config/pmd/ruleset.xml")
-  reportsDir = file("$project.buildDir/reports/pmd")
-}
-
