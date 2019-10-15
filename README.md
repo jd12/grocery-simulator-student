@@ -50,7 +50,7 @@ After cloning this repository you want to run these commands
 
 ```
 cp pre-commit .git/hooks
-chmod -x .git/hooks/pre-commit
+chmod +x .git/hooks/pre-commit
 ```
 
 Then you want to create a development branch
