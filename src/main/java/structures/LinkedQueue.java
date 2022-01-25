@@ -1,6 +1,8 @@
 package structures;
 
 public class LinkedQueue<T> implements QueueInterface<T> {
+    
+    private LinearNode<T> front;
 
     @Override
     public T dequeue() {
@@ -38,7 +40,7 @@ public class LinkedQueue<T> implements QueueInterface<T> {
         StringBuilder result = new StringBuilder();
         result.append("[");
         // start at the front of the list
-        LinearNode<T> copy = this.peek(); // this line will work once you copy in your LinearNode class
+        LinearNode<T> copy = this.front; // this line will work once you copy in your LinearNode class
         result.append(copy.getElement().toString());
         // move to the next node
         copy = copy.getNext();
